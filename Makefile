@@ -14,7 +14,7 @@ OBJS=		$(SRCS:.c=.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) push_swap.h
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./printf
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) libft/libft.a printf/printf.a
