@@ -1,33 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_logic.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 14:33:07 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 15:49:37 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		need_push(t_stack *head, int id, int len, int pivot)
+int	op_ad_b(t_stack **a, t_stack **b, int p, t_oper **oper)
 {
-	t_stack	*ptr;
-
-	ptr = head;
-	while (len--)
-	{
-		if (id == 1 && ptr->n < pivot)
-			return (1);
-		else if (id == 2 && ptr->n > pivot)
-			return (1);
-		ptr = ptr->next;
-	}
-	return (0);
+	while (p--)
+		add_oper(oper, push(a, b, 1));
+	return (1);
 }
 
-void	backtrack_stack_a(t_stack **a, int r, t_oper **oper)
-{
-	if (r > stack_len(*a) / 2)
-		while (stack_len(*a) - r++ > 0)
-			add_oper(oper, RA);
-	else
-		while (r--)
-			add_oper(oper, RRA);
-}
-
-int		sort_stack_a(t_stack **a, t_stack **b, int len, t_oper **oper)
+int	sort_stack_a(t_stack **a, t_stack **b, int len, t_oper **oper)
 {
 	int		pivot;
 	int		p;
@@ -41,32 +33,39 @@ int		sort_stack_a(t_stack **a, t_stack **b, int len, t_oper **oper)
 		return (ft_sort_a(a, len, oper));
 	pivot = ft_pivot(*a, len);
 	while (need_push(*a, 1, len - i, pivot) && i++ < len)
+	{
 		if ((*a)->n < pivot && ++p)
-			add_oper(oper, PB);
+			add_oper(oper, push(b, a, 2));
 		else
 		{
-			add_oper(oper, RA);
+			add_oper(oper, rotate(a, 1));
 			r++;
 		}
+	}
 	backtrack_stack_a(a, r, oper);
 	sort_stack_a(a, b, len - p, oper);
 	sort_stack_b(a, b, p, oper);
-	while (p--)
-		add_oper(oper, PA);
-	return (0);
+	return (op_ad_b(a, b, p, oper));
 }
 
 void	backtrack_stack_b(t_stack **b, int r, t_oper **oper)
 {
 	if (r > stack_len(*b) / 2)
 		while (stack_len(*b) - r++ > 0)
-			add_oper(oper, RB);
+			add_oper(oper, rotate(b, 2));
 	else
 		while (r--)
-			add_oper(oper, RRB);
+			add_oper(oper, revrotate(b, 2));
 }
 
-int		sort_stack_b(t_stack **a, t_stack **b, int len, t_oper **oper)
+int	op_ad(t_stack **a, t_stack **b, int p, t_oper **oper)
+{
+	while (p--)
+		add_oper(oper, push(b, a, 2));
+	return (1);
+}
+
+int	sort_stack_b(t_stack **a, t_stack **b, int len, t_oper **oper)
 {
 	int		pivot;
 	int		p;
@@ -80,17 +79,17 @@ int		sort_stack_b(t_stack **a, t_stack **b, int len, t_oper **oper)
 		return (ft_sort_b(b, len, oper));
 	pivot = ft_pivot(*b, len);
 	while (need_push(*b, 2, len - i, pivot) && i++ < len)
+	{
 		if ((*b)->n > pivot && ++p)
-			add_oper(oper, PA);
+			add_oper(oper, push(a, b, 1));
 		else
 		{
-			add_oper(oper, RB);
+			add_oper(oper, rotate(b, 2));
 			r++;
 		}
+	}
 	sort_stack_a(a, b, p, oper);
 	backtrack_stack_b(b, r, oper);
 	sort_stack_b(a, b, len - p, oper);
-	while (p--)
-		add_oper(oper, PB);
-	return (0);
+	return (op_ad(a, b, p, oper));
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands1.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 17:02:56 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 17:02:58 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 char	*push(t_stack **a, t_stack **b, int id)
@@ -14,7 +26,6 @@ char	*push(t_stack **a, t_stack **b, int id)
 		return ("pa");
 	return ("pb");
 }
-
 
 char	*rotate(t_stack **head, int id)
 {
@@ -40,8 +51,8 @@ char	*rotate(t_stack **head, int id)
 
 char	*revrotate(t_stack **head, int id)
 {
-	t_stack *seclast;
-	t_stack *last;
+	t_stack	*seclast;
+	t_stack	*last;
 
 	seclast = NULL;
 	last = *head;

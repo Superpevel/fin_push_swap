@@ -1,41 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorted.c                                           :+:      :+:    :+:   */
+/*   sort_logic_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 14:52:27 by selbert           #+#    #+#             */
-/*   Updated: 2021/10/13 17:26:13 by selbert          ###   ########.fr       */
+/*   Created: 2021/10/13 15:45:55 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 15:47:33 by selbert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *a)
+int	need_push(t_stack *head, int id, int len, int pivot)
 {
 	t_stack	*ptr;
 
-	ptr = a;
-	while (ptr && ptr->next)
+	ptr = head;
+	while (len--)
 	{
-		if (ptr->n > ptr->next->n)
-			return (0);
+		if (id == 1 && ptr->n < pivot)
+			return (1);
+		else if (id == 2 && ptr->n > pivot)
+			return (1);
 		ptr = ptr->next;
 	}
-	return (1);
+	return (0);
 }
 
-int	is_revsorted(t_stack *a)
+void	backtrack_stack_a(t_stack **a, int r, t_oper **oper)
 {
-	t_stack	*ptr;
-
-	ptr = a;
-	while (ptr->next)
-	{
-		if (ptr->n < ptr->next->n)
-			return (0);
-		ptr = ptr->next;
-	}
-	return (1);
+	if (r > stack_len(*a) / 2)
+		while (stack_len(*a) - r++ > 0)
+			add_oper(oper, rotate(a, 1));
+	else
+		while (r--)
+			add_oper(oper, revrotate(a, 1));
 }

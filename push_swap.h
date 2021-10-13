@@ -9,17 +9,6 @@
 # define ERROR "Error"
 # define INT_MIN -2147483648
 # define INT_MAX 2147483647
-# define SA swap(*a, 1)
-# define SB swap(*b, 2)
-# define SS sswap(*a, *b)
-# define PA push(a, b, 1)
-# define PB push(b, a, 2)
-# define RA rotate(a, 1)
-# define RB rotate(b, 2)
-# define RR rrotate(a, b)
-# define RRA revrotate(a, 1)
-# define RRB revrotate(b, 2)
-# define RRR rrevrotate(a, b)
 
 typedef struct		s_stack
 {
@@ -53,7 +42,7 @@ int					is_sorted(t_stack *a);
 int					is_revsorted(t_stack *a);
 void				fill_stack(t_stack **a, char **av);
 void				clear_memory(t_stack **a, t_stack **b);
-void				add_oper(t_oper **head, char *data);
+int					add_oper(t_oper **head, char *data);
 void				optim_sasa(t_oper **oper, int *flag, int *all);
 void				optim_sbsb(t_oper **oper, int *flag, int *all);
 void				optim_pbpa(t_oper **oper, int *flag, int *all);
@@ -67,6 +56,12 @@ void				remove_oper(t_oper **head);
 void				print_stacks(t_stack *a, t_stack *b);
 int					ft_pivot(t_stack *a, int len);
 int					stack_len(t_stack *a);
-int		            ft_str_equal(char const *s1, char const *s2);
-void	            ft_strdel(char **as);
+int					ft_str_equal(char const *s1, char const *s2);
+void				ft_strdel(char **as);
+int					need_push(t_stack *head, int id, int len, int pivot);
+void				backtrack_stack_a(t_stack **a, int r, t_oper **oper);
+void				ft_sort_b_onplace(t_stack **b, int len, t_oper **oper);
+int					get_z(int len,t_stack **b);
+int					get_y(int len,t_stack **b);
+void	optim_sasa(t_oper **oper, int *flag, int *all);
 #endif

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilts.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 14:52:14 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 14:52:15 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int		stack_len(t_stack *a)
+int	stack_len(t_stack *a)
 {
 	t_stack	*ptr;
 	int		len;
@@ -29,7 +41,6 @@ void	optim_operations(t_oper **oper)
 		optim_sbsb(oper, &flag, &all);
 		optim_rrara(oper, &flag, &all);
 		optim_rrbrb(oper, &flag, &all);
-
 	}
 }
 
@@ -57,7 +68,7 @@ void	bubble_sort(int *x, int size)
 	}
 }
 
-int		ft_pivot(t_stack *a, int len)
+int	ft_pivot(t_stack *a, int len)
 {
 	int		size;
 	int		*x;
@@ -67,7 +78,7 @@ int		ft_pivot(t_stack *a, int len)
 	ptr = a;
 	size = len;
 	i = 0;
-	x = (int*)malloc(sizeof(int) * len);
+	x = (int *)malloc(sizeof(int) * len);
 	while (ptr && len--)
 	{
 		x[i++] = ptr->n;

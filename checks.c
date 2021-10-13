@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checks.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 16:24:09 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 16:24:10 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 long long	ft_atoi_ll(const char *str)
@@ -22,7 +34,7 @@ long long	ft_atoi_ll(const char *str)
 	return (sign * num);
 }
 
-int			check_input(char **av)
+int	check_input(char **av)
 {
 	int			i;
 	int			j;

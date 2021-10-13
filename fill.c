@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 14:33:22 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 17:02:45 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void		push_list(t_stack **head, int data)
+int	push_list(t_stack **head, int data)
 {
 	t_stack	*current;
 	t_stack	*new;
@@ -10,21 +22,22 @@ void		push_list(t_stack **head, int data)
 	{
 		if (current->next == NULL)
 		{
-			new = (t_stack*)malloc(sizeof(t_stack));
+			new = (t_stack *)malloc(sizeof(t_stack));
 			new->n = data;
 			new->next = NULL;
 			current->next = new;
-			return ;
+			return (1);
 		}
 		else
 			return (push_list(&(current)->next, data));
 	}
-	(*head) = (t_stack*)malloc(sizeof(t_stack));
+	(*head) = (t_stack *)malloc(sizeof(t_stack));
 	(*head)->n = data;
 	(*head)->next = NULL;
+	return (1);
 }
 
-void		remove_stack(t_stack **head)
+void	remove_stack(t_stack **head)
 {
 	if (*head)
 	{
@@ -34,13 +47,13 @@ void		remove_stack(t_stack **head)
 	}
 }
 
-void		clear_memory(t_stack **a, t_stack **b)
+void	clear_memory(t_stack **a, t_stack **b)
 {
 	remove_stack(a);
 	remove_stack(b);
 }
 
-void		check_duplicates(t_stack **a)
+void	check_duplicates(t_stack **a)
 {
 	t_stack	*ptr;
 	t_stack	*tmp;
@@ -53,7 +66,7 @@ void		check_duplicates(t_stack **a)
 		{
 			if (ptr->n == tmp->n)
 			{
-				ft_putendl_fd(ERROR,1);
+				ft_putendl_fd(ERROR, 1);
 				remove_stack(a);
 				exit(0);
 			}
@@ -63,7 +76,7 @@ void		check_duplicates(t_stack **a)
 	}
 }
 
-void		fill_stack(t_stack **a, char **av)
+void	fill_stack(t_stack **a, char **av)
 {
 	while (*av != NULL)
 	{
