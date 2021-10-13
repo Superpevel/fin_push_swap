@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selbert <selbert@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 19:00:07 by selbert           #+#    #+#             */
+/*   Updated: 2021/10/13 19:01:28 by selbert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -10,13 +22,13 @@
 # define INT_MIN -2147483648
 # define INT_MAX 2147483647
 
-typedef struct		s_stack
+typedef struct s_stack
 {
 	int				n;
 	struct s_stack	*next;
-}					t_stack;
+}				t_stack;
 
-typedef struct		s_oper
+typedef struct s_oper
 {
 	char			*data;
 	struct s_oper	*next;
@@ -30,9 +42,9 @@ void				rrotate(t_stack **a, t_stack **b);
 char				*revrotate(t_stack **head, int id);
 void				rrevrotate(t_stack **a, t_stack **b);
 int					sort_stack_a(t_stack **a, t_stack **b,
-								int len, t_oper **oper);
+						int len, t_oper **oper);
 int					sort_stack_b(t_stack **a, t_stack **b,
-								int len, t_oper **oper);
+						int len, t_oper **oper);
 int					ft_sort_asc(t_stack **a, int len, t_oper **oper);
 int					ft_sort_desc(t_stack **b, int len, t_oper **oper);
 int					ft_sort_a(t_stack **a, int len, t_oper **oper);
@@ -61,7 +73,7 @@ void				ft_strdel(char **as);
 int					need_push(t_stack *head, int id, int len, int pivot);
 void				backtrack_stack_a(t_stack **a, int r, t_oper **oper);
 void				ft_sort_b_onplace(t_stack **b, int len, t_oper **oper);
-int					get_z(int len,t_stack **b);
-int					get_y(int len,t_stack **b);
-void	optim_sasa(t_oper **oper, int *flag, int *all);
+int					get_z(int len, t_stack **b);
+int					get_y(int len, t_stack **b);
+void				optim_sasa(t_oper **oper, int *flag, int *all);
 #endif
